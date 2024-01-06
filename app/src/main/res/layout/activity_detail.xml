@@ -35,15 +35,28 @@
         app:layout_constraintTop_toBottomOf="@+id/up_name"/>
 
     <Button
-        android:text="@string/Unfollow"
+        android:id="@+id/unfollow_button"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:text="@string/Unfollow"
+        app:layout_constraintBottom_toBottomOf="@+id/up_img"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.07"
-        android:id="@+id/unfollow_button"
-        app:layout_constraintBottom_toBottomOf="@+id/up_img" app:layout_constraintStart_toEndOf="@+id/up_img"
-        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/up_fans"
-        app:layout_constraintVertical_bias="1.0"/>
+        app:layout_constraintStart_toEndOf="@+id/up_img"
+        app:layout_constraintTop_toBottomOf="@+id/up_fans"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/Back"
+        app:layout_constraintBottom_toBottomOf="@+id/up_img"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toEndOf="@+id/unfollow_button"
+        app:layout_constraintTop_toBottomOf="@+id/up_fans"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

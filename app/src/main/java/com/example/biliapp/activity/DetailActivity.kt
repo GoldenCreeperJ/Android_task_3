@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.biliapp.adapter.VideoListAdapter
@@ -44,9 +45,15 @@ class DetailActivity : AppCompatActivity() {
         binding.videoList.layoutManager= LinearLayoutManager(this)
         binding.videoList.adapter= VideoListAdapter(videoInfo)
         binding.unfollowButton.setOnClickListener{
-            isUnfollowed=true
-            finish()
+            if (isUnfollowed){
+                Toast.makeText(this,"关注成功", Toast.LENGTH_SHORT).show()
+                binding.unfollowButton.text="已关注" }
+            else{
+                Toast.makeText(this,"取关成功",Toast.LENGTH_SHORT).show()
+                binding.unfollowButton.text="关注" }
+            isUnfollowed= !isUnfollowed
         }
+        binding.backButton.setOnClickListener { finish() }
     }
 
     override fun finish() {

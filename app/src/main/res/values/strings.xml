@@ -1,4 +1,5 @@
 <resources>
-    <string name="Unfollow">取关</string>
+    <string name="Unfollow">已关注</string>
     <string name="app_name">BiliApp</string>
+    <string name="Back">返回</string>
 </resources>

@@ -4,17 +4,18 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.biliapp.DataSender
 import com.example.biliapp.adapter.IntermediateAdapter
 import com.example.biliapp.adapter.UpListAdapter
 import com.example.biliapp.databinding.ActivityMainBinding
 import com.example.biliapp.item.IntermediateItem
 import com.example.biliapp.item.UpItem
+import com.example.biliapp.item.UpItemMargin
 import com.example.biliapp.item.VideoItem
 
 class MainActivity : AppCompatActivity(), UpListAdapter.OnClickListener, UpListAdapter.OnLongClickListener {
@@ -53,13 +54,21 @@ class MainActivity : AppCompatActivity(), UpListAdapter.OnClickListener, UpListA
         binding.upList.adapter= UpListAdapter(upData)
             .apply {clickListener=this@MainActivity
                 longClickListener=this@MainActivity}
-        binding.dynamicList.adapter= IntermediateAdapter(videoData)
         upListAdapter=binding.upList.adapter as UpListAdapter
+        binding.upList.addItemDecoration(UpItemMargin())
+
+        binding.dynamicList.adapter= IntermediateAdapter(videoData)
         intermediateAdapter=binding.dynamicList.adapter as IntermediateAdapter
+        binding.dynamicList.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.upList.smoothScrollToPosition(position)
+            }
+        })
+
 
         pagerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK && result.data?.getBooleanExtra("is_unfollowed", false) == true) {
-                Toast.makeText(this,"取关成功",Toast.LENGTH_SHORT).show()
                 result.data!!.getStringExtra("up_name")!!.let {upName->
                     upData = ArrayList(upData.filter { it.name != upName})
                     videoData = ArrayList(videoData.filter { it.owner != upName})
