@@ -3,11 +3,12 @@ package com.example.biliapp.item
 import android.os.Parcel
 import android.os.Parcelable
 
-class VideoItem(val name: String?, val img:Int): Parcelable{
+class VideoItem(val name: String?, val img:Int): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readInt()
     )
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
         parcel.writeInt(img)

@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class UpItemMargin : RecyclerView.ItemDecoration(){
+class UpItemMargin : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
         view: View,
@@ -12,6 +12,6 @@ class UpItemMargin : RecyclerView.ItemDecoration(){
         state: RecyclerView.State
     ) {
         super.getItemOffsets(outRect, view, parent, state)
-        outRect.left=10
+        outRect.left = 10
     }
 }

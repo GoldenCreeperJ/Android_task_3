@@ -30,3 +30,33 @@ class UpItem(val img:Int, val name: String?,val fans:Int) : Parcelable {
         }
     }
 }
+
+class DiaryItem(val title:String?,val city:String?,val weather:String?,val date:String?):Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(title)
+        parcel.writeString(city)
+        parcel.writeString(weather)
+        parcel.writeString(date)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<DiaryItem> {
+        override fun createFromParcel(parcel: Parcel): DiaryItem {
+            return DiaryItem(parcel)
+        }
+
+        override fun newArray(size: Int): Array<DiaryItem?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
